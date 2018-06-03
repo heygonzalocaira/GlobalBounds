@@ -1,1 +1,36 @@
 
+TERRENO.HPP 
+
+#ifndef _TERRENO_HPP
+#define _TERRENO_HPP
+#include <iostream>
+#include <vector>
+#include <SFML\Graphics.hpp>	
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+typedef std::vector<sf::CircleShape*> Holes;
+class  Terreno
+{
+	public:
+		static Terreno& getInstance();
+		void draw(sf::RenderWindow& window);
+		void crearHueco(sf::Vector2f pos,float radio);
+		sf::Image& getTerrenoImage();
+		void reset();
+	private:
+		Terreno(void);
+		Terreno(Terreno const&);
+		void operator=(Terreno const&);
+		void load();
+		sf::RenderTexture mRenderTexture;
+		sf::Sprite mTerrenoSpr;
+		sf::Image mTerrenoImg;
+		sf::Texture mTerrain;
+		Holes mHuecos;
+		bool mChanged;
+};
+
+#endif
+
+
+
+

@@ -23,7 +23,7 @@ Personaje::Personaje(){
   txt_personaje = new Texture;
   txt_personaje->loadFromFile("heroe.png");
   spr_personaje = new Sprite(*txt_personaje);
-  spr_personaje->setPosition(100,300);
+  spr_personaje->setPosition(100,320);
   velocidad.x=0;
   velocidad.y=0;
 
@@ -54,19 +54,33 @@ Proyectil::Proyectil(){
   txt_proyectil = new Texture;
   txt_proyectil->loadFromFile("granada.png");
   spr_proyectil = new Sprite(*txt_proyectil);
-  spr_proyectil->setPosition(120,300);
+  spr_proyectil->setPosition(120,320);
 
   velocidad.x=50;
   velocidad.y=-50;
 
   aceleracion.x=0;
   aceleracion.y=9.8;
+  if(spr_proyectil->getPosition().x> 500 && spr_proyectil-> getPosition().y >400){
+    spr_proyectil->setPosition(120,320);
+  }
 }
 void Proyectil::actualizar(float tiemp){
   tiemp/=10;
   velocidad.x+=aceleracion.x *tiemp;
   velocidad.y+=aceleracion.y *tiemp;
   spr_proyectil->setPosition(spr_proyectil->getPosition().x+velocidad.x*tiemp,spr_proyectil->getPosition().y+velocidad.y*tiemp);
+  // borrar este IF para que solo se dibuje una vez
+
+  if(spr_proyectil->getPosition().x> 500 && spr_proyectil-> getPosition().y >400 ){
+
+    velocidad.x=50;
+    velocidad.y=-50;
+    aceleracion.x=0;
+    aceleracion.y=9.8;
+    spr_proyectil->setPosition(120,320);
+  }
+
 }
 /*lass Mira:public Juego{
 
@@ -90,6 +104,8 @@ private:
 
   Event *evento;
 
+  Texture *txt_background;
+  Sprite *spr_brackground;
   Personaje *jugador1;
   Proyectil *granada;
 };
@@ -99,6 +115,11 @@ Juego::Juego(Vector2f resolucion,String titulo){
   ventana->setFramerateLimit(60);
 
   fps = 1/60.f;
+
+  txt_background = new Texture;
+  txt_background->loadFromFile("background.png");
+  spr_brackground = new Sprite(*txt_background);
+  spr_brackground->setPosition(0,0);
 
   reloj1 = new Clock();
   tiempo1 = new Time();
@@ -115,6 +136,7 @@ Juego::Juego(Vector2f resolucion,String titulo){
 void Juego::dibujar(){
   ventana->clear();
   granada->actualizar(tiempo2);
+  ventana->draw(*spr_brackground);
   ventana->draw(jugador1->get_sprite());
   ventana->draw(granada->get_sprite1());
   ventana->display();

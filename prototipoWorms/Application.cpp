@@ -1,10 +1,11 @@
 #include "Application.h"
 #include "ResourceIdentifiers.h"
+using namespace sf;
 void Application::run()
 {
-    mainWindow.create(sf::VideoMode(constants::windowWidth,constants::windowHeight),"A Game feat. Tanks");
-    mainWindow.setFramerateLimit(120);
-    mainWindow.setVerticalSyncEnabled(false);
+    mainWindow.create(sf::VideoMode(constants::windowWidth,constants::windowHeight),"Bullet & Bullet");
+    mainWindow.setFramerateLimit(60);
+    //mainWindow.setVerticalSyncEnabled(false);
     sf::Clock frameTimer;
     changeState(TitleScreenState);
     msgStream.getGroup("AllAppStates").subscribe(&mGame);
@@ -55,7 +56,7 @@ void Application::loadResources()
 {
     if(ResourcesLoaded)
         return;
-    if( !(textureMgr.load(TankTexture,"data/gusano.png") &&
+    if( !(textureMgr.load(TankTexture,"data/heroe.png") &&
     textureMgr.load(TurretTexture,"data/turret.png") &&
     textureMgr.load(ExplosionA,"data/ExplosionAsmall.png") &&
     textureMgr.load(TurretTarget,"data/target.png") &&

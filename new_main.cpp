@@ -39,8 +39,10 @@ Juego::Juego(Vector2f resolucion,String titulo){
 
   fps = 1/60.f;
 
+  //la textura carga el recurso que seria la imagen
   txt_background = new Texture;
   txt_background->loadFromFile("background.png");
+  //el sprite puede ser modificado, se le puede dar angulo, posicion, rotacion, etc.
   spr_brackground = new Sprite(*txt_background);
   spr_brackground->setPosition(0,0);
 
@@ -79,22 +81,29 @@ void Juego::procesarEvento(){
 
   while(ventana->pollEvent(*evento)){
     switch (evento->type) {
-      case Event::Closed:
+     case Event::Closed:
         ventana->close();
         exit(1);
-      case Event::KeyPressed:
+        //break;
+        break;
+     case Event::KeyPressed:
       if(Keyboard::isKeyPressed(Keyboard::Up)){
-        (jugador1->get_sprite()).setPosition((jugador1->get_sprite()).getPosition().x,(jugador1->get_sprite()).getPosition().y-5);
+        //(jugador1->get_sprite()).setPosition((jugador1->get_sprite()).getPosition().x,(jugador1->get_sprite()).getPosition().y-5);
+        (jugador1->get_sprite())->setPosition((jugador1->get_sprite())->getPosition().x,(jugador1->get_sprite())->getPosition().y-5);
       }
       else if(Keyboard::isKeyPressed(Keyboard::Down)){
-        (jugador1->get_sprite()).setPosition((jugador1->get_sprite()).getPosition().x,(jugador1->get_sprite()).getPosition().y+5);
+        //(jugador1->get_sprite()).setPosition((jugador1->get_sprite()).getPosition().x,(jugador1->get_sprite()).getPosition().y+5);
+        (jugador1->get_sprite())->setPosition((jugador1->get_sprite())->getPosition().x,(jugador1->get_sprite())->getPosition().y+5);
       }
       else if(Keyboard::isKeyPressed(Keyboard::Left)){
-        (jugador1->get_sprite()).setPosition((jugador1->get_sprite()).getPosition().x-5,(jugador1->get_sprite()).getPosition().y);
+        //(jugador1->get_sprite()).setPosition((jugador1->get_sprite()).getPosition().x-5,(jugador1->get_sprite()).getPosition().y);
+        (jugador1->get_sprite())->setPosition((jugador1->get_sprite())->getPosition().x-5,(jugador1->get_sprite())->getPosition().y);
       }
       else if(Keyboard::isKeyPressed(Keyboard::Right)){
-        (jugador1->get_sprite()).setPosition((jugador1->get_sprite()).getPosition().x+5,(jugador1->get_sprite()).getPosition().y);
+        //(jugador1->get_sprite()).setPosition((jugador1->get_sprite()).getPosition().x+5,(jugador1->get_sprite()).getPosition().y);
+        (jugador1->get_sprite())->setPosition((jugador1->get_sprite())->getPosition().x+5,(jugador1->get_sprite())->getPosition().y);
       }
+    break;
     }
   }
 }

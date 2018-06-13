@@ -10,7 +10,8 @@ class Personaje{
 public:
   Personaje();
   void actualizar(float tiemp);
-  Sprite get_sprite(){return *spr_personaje;};
+  //Sprite get_sprite(){return *spr_personaje;};
+  Sprite* get_sprite(){return spr_personaje;};
 private:
   Sprite *spr_personaje;
   Texture *txt_personaje;

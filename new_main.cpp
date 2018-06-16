@@ -50,8 +50,10 @@ Juego::Juego(Vector2f resolucion,String titulo){
 
   fps = 1/60.f;
 
+  //la textura carga el recurso que seria la imagen
   txt_background = new Texture;
   txt_background->loadFromFile("background.png");
+  //el sprite puede ser modificado, se le puede dar angulo, posicion, rotacion, etc.
   spr_brackground = new Sprite(*txt_background);
   spr_brackground->setPosition(0,0);
 
@@ -106,11 +108,14 @@ void Juego::procesarEvento(){
   int x0=spr_juegoP->getPosition().x, y0=spr_juegoP->getPosition().y;
   while(ventana->pollEvent(*evento)){
     switch (evento->type) {
-      case Event::Closed:
+     case Event::Closed:
         ventana->close();
         exit(1);
-      case Event::KeyPressed:
+        //break;
+        break;
+     case Event::KeyPressed:
       if(Keyboard::isKeyPressed(Keyboard::Up)){
+
         int h=4;
         if(h>=y0)
         {
@@ -128,9 +133,11 @@ void Juego::procesarEvento(){
         }
         else{
         spr_juegoP->setPosition(spr_juegoP->getPosition().x,spr_juegoP->getPosition().y+5);
+
       }
     }
       else if(Keyboard::isKeyPressed(Keyboard::Left)){
+
         int h1=5;
         if(h1>=x0)
         {
@@ -149,6 +156,8 @@ void Juego::procesarEvento(){
         else{
         spr_juegoP->setPosition(spr_juegoP->getPosition().x+5,spr_juegoP->getPosition().y);
       }
+=======
+
     }
     if(Keyboard::isKeyPressed(Keyboard::A)){
       sonido.play();

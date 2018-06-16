@@ -5,7 +5,7 @@
 
 Personaje::Personaje(){
   txt_personaje = new Texture;
-  txt_personaje->loadFromFile("elcarlo.png");
+  txt_personaje->loadFromFile("Sprites/elcarlo.png");
   spr_personaje = new Sprite(*txt_personaje);
   spr_personaje->setPosition(100,320);
   velocidad.x=0;

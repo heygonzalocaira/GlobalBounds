@@ -1,7 +1,10 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include "Personaje.h"
 #include "Proyectil.h"
+#include "Flecha.h"
+
 using namespace sf;
 using namespace std;
 
@@ -27,10 +30,18 @@ private:
 
   Event *evento;
 
+  Texture *txt_juegoP;
+  Sprite *spr_juegoP;
   Texture *txt_background;
   Sprite *spr_brackground;
+
+  SoundBuffer buffer;
+  Sound sonido;
+  Music Cancion;
+
   Personaje *jugador1;
   Proyectil *granada;
+  Flecha *puntero;
 };
 
 Juego::Juego(Vector2f resolucion,String titulo){
@@ -44,12 +55,24 @@ Juego::Juego(Vector2f resolucion,String titulo){
   spr_brackground = new Sprite(*txt_background);
   spr_brackground->setPosition(0,0);
 
+  txt_juegoP = new Texture;
+  txt_juegoP->loadFromFile("heroe.png");
+  spr_juegoP = new Sprite(*txt_juegoP);
+  spr_juegoP->setPosition(400,200);
+
+  buffer.loadFromFile("soundtrack.wav");
+  sonido.setBuffer(buffer);
+  Cancion.openFromFile("soundtrack anime.ogg");
+  Cancion.setVolume(80);
+  Cancion.setPitch(1.2);
+  Cancion.setLoop(true);
+
   reloj1 = new Clock();
   tiempo1 = new Time();
 
   jugador1=new Personaje();
   granada=new Proyectil();
-
+  puntero = new Flecha();
   tiempo2 = 0.f;
   evento = new Event;
 
@@ -59,9 +82,12 @@ Juego::Juego(Vector2f resolucion,String titulo){
 void Juego::dibujar(){
   ventana->clear();
   granada->actualizar(tiempo2);
+  //puntero->actualizarF(tiempo2);
   ventana->draw(*spr_brackground);
   ventana->draw(jugador1->get_sprite());
   ventana->draw(granada->get_sprite1());
+  ventana->draw(puntero->get_sprite2());
+  ventana->draw(*spr_juegoP);
   ventana->display();
 }
 void Juego::gameLoop(){
@@ -77,6 +103,7 @@ void Juego::gameLoop(){
 
 void Juego::procesarEvento(){
 
+  int x0=spr_juegoP->getPosition().x, y0=spr_juegoP->getPosition().y;
   while(ventana->pollEvent(*evento)){
     switch (evento->type) {
       case Event::Closed:
@@ -84,17 +111,51 @@ void Juego::procesarEvento(){
         exit(1);
       case Event::KeyPressed:
       if(Keyboard::isKeyPressed(Keyboard::Up)){
-        (jugador1->get_sprite()).setPosition((jugador1->get_sprite()).getPosition().x,(jugador1->get_sprite()).getPosition().y-5);
+        int h=4;
+        if(h>=y0)
+        {
+          break;
+        }
+        else{
+        spr_juegoP->setPosition(spr_juegoP->getPosition().x,spr_juegoP->getPosition().y-5);
+      }
       }
       else if(Keyboard::isKeyPressed(Keyboard::Down)){
-        (jugador1->get_sprite()).setPosition((jugador1->get_sprite()).getPosition().x,(jugador1->get_sprite()).getPosition().y+5);
+        int h1=580;
+        if(h1<=y0)
+        {
+          break;
+        }
+        else{
+        spr_juegoP->setPosition(spr_juegoP->getPosition().x,spr_juegoP->getPosition().y+5);
       }
+    }
       else if(Keyboard::isKeyPressed(Keyboard::Left)){
-        (jugador1->get_sprite()).setPosition((jugador1->get_sprite()).getPosition().x-5,(jugador1->get_sprite()).getPosition().y);
+        int h1=5;
+        if(h1>=x0)
+        {
+          break;
+        }
+        else{
+        spr_juegoP->setPosition(spr_juegoP->getPosition().x-5,spr_juegoP->getPosition().y);
+      }
       }
       else if(Keyboard::isKeyPressed(Keyboard::Right)){
-        (jugador1->get_sprite()).setPosition((jugador1->get_sprite()).getPosition().x+5,(jugador1->get_sprite()).getPosition().y);
+        int h2=760;
+        if(h2<=x0)
+        {
+          break;
+        }
+        else{
+        spr_juegoP->setPosition(spr_juegoP->getPosition().x+5,spr_juegoP->getPosition().y);
       }
+    }
+    if(Keyboard::isKeyPressed(Keyboard::A)){
+      sonido.play();
+    }
+    if(Keyboard::isKeyPressed(Keyboard::D)){
+      Cancion.play();
+    }
     }
   }
 }

@@ -156,7 +156,7 @@ void Juego::procesarEvento(){
         else{
         spr_juegoP->setPosition(spr_juegoP->getPosition().x+5,spr_juegoP->getPosition().y);
       }
-=======
+
 
     }
     if(Keyboard::isKeyPressed(Keyboard::A)){

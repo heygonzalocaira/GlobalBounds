@@ -122,7 +122,7 @@ void Juego::procesarEvento(){
           break;
         }
         else{
-        spr_juegoP->setPosition(spr_juegoP->getPosition().x,spr_juegoP->getPosition().y-5);
+        jugador1->arriba();
       }
       }
       else if(Keyboard::isKeyPressed(Keyboard::Down)){
@@ -132,7 +132,7 @@ void Juego::procesarEvento(){
           break;
         }
         else{
-        spr_juegoP->setPosition(spr_juegoP->getPosition().x,spr_juegoP->getPosition().y+5);
+        jugador1->abajo();
 
       }
     }
@@ -144,7 +144,8 @@ void Juego::procesarEvento(){
           break;
         }
         else{
-        spr_juegoP->setPosition(spr_juegoP->getPosition().x-5,spr_juegoP->getPosition().y);
+        //spr_juegoP->setPosition(spr_juegoP->getPosition().x-5,spr_juegoP->getPosition().y);
+        jugador1->izquierda();
       }
       }
       else if(Keyboard::isKeyPressed(Keyboard::Right)){
@@ -154,7 +155,8 @@ void Juego::procesarEvento(){
           break;
         }
         else{
-        spr_juegoP->setPosition(spr_juegoP->getPosition().x+5,spr_juegoP->getPosition().y);
+        //spr_juegoP->setPosition(spr_juegoP->getPosition().x+5,spr_juegoP->getPosition().y);
+        jugador1->derecha();
       }
 
 

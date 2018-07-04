@@ -17,7 +17,11 @@ private:
 };
 Flecha::Flecha(){
   txt_flecha = new Texture;
+<<<<<<< HEAD
   txt_flecha->loadFromFile("flecha.png");
+=======
+  txt_flecha->loadFromFile("Sprites/flecha.png");
+>>>>>>> c6da2b0449bab8cce108d17cb26b612fde5ed6b1
   spr_flecha = new Sprite(*txt_flecha);
   spr_flecha->setPosition(150,340);
   angulo=0;

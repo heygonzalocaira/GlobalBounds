@@ -5,7 +5,8 @@
 
 Personaje::Personaje(){
   txt_personaje = new Texture;
-  txt_personaje->loadFromFile("elcarlo.png");
+
+  txt_personaje->loadFromFile("Sprites/elcarlo.png");
   spr_personaje = new Sprite(*txt_personaje);
   spr_personaje->setPosition(100,320);
   velocidad.x=0;
@@ -20,6 +21,7 @@ void Personaje::actualizar(float tiemp){
   velocidad.y+=aceleracion.y *tiemp;
   spr_personaje->setPosition(spr_personaje->getPosition().x+velocidad.x*tiemp,spr_personaje->getPosition().y+velocidad.y*tiemp);
 }
+
 void Personaje::izquierda(){
   spr_personaje->setPosition(spr_personaje->getPosition().x-5,spr_personaje->getPosition().y);
 }

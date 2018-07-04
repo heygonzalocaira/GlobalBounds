@@ -52,19 +52,25 @@ Juego::Juego(Vector2f resolucion,String titulo){
 
   //la textura carga el recurso que seria la imagen
   txt_background = new Texture;
-  txt_background->loadFromFile("background.png");
+
+
+  txt_background->loadFromFile("Sprites/background.png");
+
   //el sprite puede ser modificado, se le puede dar angulo, posicion, rotacion, etc.
   spr_brackground = new Sprite(*txt_background);
   spr_brackground->setPosition(0,0);
 
   txt_juegoP = new Texture;
-  txt_juegoP->loadFromFile("heroe.png");
-  spr_juegoP = new Sprite(*txt_juegoP);
-  spr_juegoP->setPosition(400,200);
 
-  buffer.loadFromFile("soundtrack.wav");
+
+  txt_juegoP->loadFromFile("Sprites/heroe.png");
+  spr_juegoP = new Sprite(*txt_juegoP);
+  spr_juegoP->setPosition(600,320);
+
+  buffer.loadFromFile("SOUND/soundtrack.wav");
   sonido.setBuffer(buffer);
-  Cancion.openFromFile("soundtrack anime.ogg");
+  Cancion.openFromFile("SOUND/soundtrack anime.ogg");
+
   Cancion.setVolume(80);
   Cancion.setPitch(1.2);
   Cancion.setLoop(true);
@@ -84,7 +90,9 @@ Juego::Juego(Vector2f resolucion,String titulo){
 void Juego::dibujar(){
   ventana->clear();
   granada->actualizar(tiempo2);
+
   //puntero->actualizarF(tiempo2);
+
   ventana->draw(*spr_brackground);
   ventana->draw(jugador1->get_sprite());
   ventana->draw(granada->get_sprite1());
@@ -122,7 +130,9 @@ void Juego::procesarEvento(){
           break;
         }
         else{
+
         jugador1->arriba();
+
       }
       }
       else if(Keyboard::isKeyPressed(Keyboard::Down)){
@@ -132,7 +142,9 @@ void Juego::procesarEvento(){
           break;
         }
         else{
+
         jugador1->abajo();
+
 
       }
     }
@@ -144,8 +156,10 @@ void Juego::procesarEvento(){
           break;
         }
         else{
+
         //spr_juegoP->setPosition(spr_juegoP->getPosition().x-5,spr_juegoP->getPosition().y);
         jugador1->izquierda();
+
       }
       }
       else if(Keyboard::isKeyPressed(Keyboard::Right)){
@@ -155,9 +169,11 @@ void Juego::procesarEvento(){
           break;
         }
         else{
+
         //spr_juegoP->setPosition(spr_juegoP->getPosition().x+5,spr_juegoP->getPosition().y);
         jugador1->derecha();
       }
+
 
 
     }

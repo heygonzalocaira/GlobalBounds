@@ -1,2 +1,0 @@
-g++ Animation.cpp Application.cpp CtrlPanel.cpp Game.cpp GameOverScreen.cpp GameSetupScreen.cpp Land.cpp Menu.cpp MessageStream.cpp Missile.cpp MsgComponents.cpp Player.cpp simplexnoise.cpp Tank.cpp TitleScreen.cpp utilities.cpp WeaponPostEffects.cpp World.cpp -o test -lsfml-graphics -lsfml-system -lsfml-window -lsfml-audio
-

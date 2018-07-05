@@ -25,7 +25,7 @@ void Proyectil::actualizar(float tiemp){
   spr_proyectil->setPosition(spr_proyectil->getPosition().x+velocidad.x*tiemp,spr_proyectil->getPosition().y+velocidad.y*tiemp);
   // borrar este IF para que solo se dibuje una vez
 
-  /*if(spr_proyectil->getPosition().x> 500 && spr_proyectil-> getPosition().y >400 ){
+  if(spr_proyectil->getPosition().x> 500 && spr_proyectil-> getPosition().y >400 ){
 
     velocidad.x=50;
     velocidad.y=-50;
@@ -33,5 +33,5 @@ void Proyectil::actualizar(float tiemp){
     aceleracion.y=9.8;
     spr_proyectil->setPosition(120,320);
   }
-*/
+
 }

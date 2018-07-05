@@ -4,6 +4,7 @@
 #include "Personaje.h"
 #include "Proyectil.h"
 #include "Flecha.h"
+#include "Soundtrack.h"
 
 using namespace sf;
 using namespace std;
@@ -36,13 +37,10 @@ private:
   Texture *txt_background;
   Sprite *spr_brackground;
 
-  SoundBuffer buffer;
-  Sound sonido;
-  Music Cancion;
-
   Personaje *jugador1;
   Proyectil *granada;
   Flecha *puntero;
+  SoundTrack *musica;
 };
 
 Juego::Juego(Vector2f resolucion,String titulo){
@@ -66,20 +64,13 @@ Juego::Juego(Vector2f resolucion,String titulo){
   spr_juegoP = new Sprite(*txt_juegoP);
   spr_juegoP->setPosition(600,320);*/
 
-  buffer.loadFromFile("SOUND/soundtrack.wav");
-  sonido.setBuffer(buffer);
-  Cancion.openFromFile("SOUND/soundtrack anime.ogg");
-
-  Cancion.setVolume(80);
-  Cancion.setPitch(1.2);
-  Cancion.setLoop(true);
-
   reloj1 = new Clock();
   tiempo1 = new Time();
 
   jugador1=new Personaje();
   granada=new Proyectil();
   puntero = new Flecha();
+  musica= new SoundTrack();
   tiempo2 = 0.f;
   evento = new Event;
 
@@ -123,7 +114,7 @@ void Juego::procesarEvento(){
      case Event::KeyPressed:
       if(Keyboard::isKeyPressed(Keyboard::Up)){
         int h=4;
-        if(h>=y0  break;
+        if(h>=y0) break;
         else jugador1->arriba();
 
       }
@@ -147,8 +138,9 @@ void Juego::procesarEvento(){
         //spr_juegoP->setPosition(spr_juegoP->getPosition().x+5,spr_juegoP->getPosition().y);
         jugador1->derecha();
     }
-    if(Keyboard::isKeyPressed(Keyboard::A))sonido.play();
-    if(Keyboard::isKeyPressed(Keyboard::D))Cancion.play();
+    //if(Keyboard::isKeyPressed(Keyboard::Z))
+    //musica->suenaCancion();
+    if(Keyboard::isKeyPressed(Keyboard::X))musica->suenaSonido();
 
     }
   }

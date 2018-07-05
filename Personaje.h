@@ -15,6 +15,8 @@ public:
   void derecha();
   void arriba();
   void abajo();
+  void set_frame(Sprite &spr_p,Vector2i numero_frame);
+  void frame_loop();
   double getpositionX();
   double getpositionY();
 private:
@@ -22,5 +24,7 @@ private:
   Texture *txt_personaje;
   Vector2f velocidad;
   Vector2f aceleracion;
+  Vector2i division_sprites;
+  Vector2i frame_actual;
   friend class Juego;
 };

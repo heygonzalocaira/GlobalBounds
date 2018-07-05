@@ -6,7 +6,7 @@
 Personaje::Personaje(){
   txt_personaje = new Texture;
 
-  txt_personaje->loadFromFile("Sprites/heroe.png");
+  txt_personaje->loadFromFile("Sprites/frames.png");
   spr_personaje = new Sprite(*txt_personaje);
   spr_personaje->setPosition(100,320);
   velocidad.x=0;
@@ -14,6 +14,22 @@ Personaje::Personaje(){
 
   aceleracion.x=0;
   aceleracion.y=0;
+
+  division_sprites.x=4;
+  division_sprites.y=1;
+  frame_actual.x=0;
+  frame_actual.y=0;
+  set_frame(*spr_personaje,{0,0});
+}
+void Personaje::set_frame(Sprite &spr_p,Vector2i numero_frame){
+  IntRect posicion(numero_frame.x*spr_personaje->getTexture()->getSize().x/division_sprites.x,numero_frame.y*spr_personaje->getTexture()->getSize().y/division_sprites.y,spr_personaje->getTexture()->getSize().x/division_sprites.x,spr_personaje->getTexture()->getSize().y/division_sprites.y);
+  spr_personaje->setTextureRect(posicion);
+}
+void Personaje::frame_loop(){
+  if(frame_actual.x<division_sprites.x-1)
+    frame_actual.x++;
+  else
+    frame_actual.x =0;
 }
 void Personaje::actualizar(float tiemp){
   tiemp/=10;
@@ -23,9 +39,15 @@ void Personaje::actualizar(float tiemp){
 }
 
 void Personaje::izquierda(){
+  if(frame_actual.x<division_sprites.x-1)
+    frame_actual.x++;
+  set_frame(*spr_personaje,frame_actual);
   spr_personaje->setPosition(spr_personaje->getPosition().x-5,spr_personaje->getPosition().y);
 }
 void Personaje::derecha(){
+  if(frame_actual.x<division_sprites.x-1)
+    frame_actual.x++;
+  set_frame(*spr_personaje,frame_actual);
   spr_personaje->setPosition(spr_personaje->getPosition().x+5,spr_personaje->getPosition().y);
 }
 void Personaje::arriba(){

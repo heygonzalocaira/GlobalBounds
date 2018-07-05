@@ -6,7 +6,7 @@
 Proyectil::Proyectil(){
   txt_proyectil = new Texture;
 
-  txt_proyectil->loadFromFile("Sprites/granada.png");
+  txt_proyectil->loadFromFile("Sprites/bomba.png");
 
   spr_proyectil = new Sprite(*txt_proyectil);
   spr_proyectil->setPosition(120,320);

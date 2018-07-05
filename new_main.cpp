@@ -5,6 +5,7 @@
 #include "Proyectil.h"
 #include "Flecha.h"
 #include "Soundtrack.h"
+#include "Menu.h"
 
 using namespace sf;
 using namespace std;
@@ -18,6 +19,7 @@ public:
   Juego(Vector2f resolucion,String titulo);
   void gameLoop();
   void dibujar();
+  void dibujarMenu();
   void procesarEvento();
 private:
   RenderWindow *ventana;
@@ -26,6 +28,7 @@ private:
   Time *tiempo1;
   float tiempo2;
 
+  bool gameMenu=true;
   bool gameOver=false;
   float fps;
   int x0,y0;
@@ -41,6 +44,7 @@ private:
   Proyectil *granada;
   Flecha *puntero;
   SoundTrack *musica;
+  MenuJuego *menu;
 };
 
 Juego::Juego(Vector2f resolucion,String titulo){
@@ -71,22 +75,28 @@ Juego::Juego(Vector2f resolucion,String titulo){
   granada=new Proyectil();
   puntero = new Flecha();
   musica= new SoundTrack();
+  menu = new MenuJuego();
   tiempo2 = 0.f;
   evento = new Event;
 
   musica->suenaCancion();
   gameLoop();
 }
+void Juego::dibujarMenu(){
+  ventana->draw(menu->getMenu());
+}
 void Juego::dibujar(){
   ventana->clear();
-  granada->actualizar(tiempo2);
-
-  puntero->actualizarF(tiempo2);
-
-  ventana->draw(*spr_brackground);
-  ventana->draw(jugador1->get_sprite());
-  ventana->draw(granada->get_sprite1());
-  ventana->draw(puntero->get_sprite2());
+  dibujarMenu();
+  if(gameMenu == false){
+    granada->actualizar(tiempo2);
+    puntero->actualizarF(tiempo2);
+    ventana->draw(*spr_brackground);
+    ventana->draw(jugador1->get_sprite());
+    ventana->draw(granada->get_sprite1());
+    ventana->draw(puntero->get_sprite2());
+    ventana->display();
+  }
   //ventana->draw(*spr_juegoP);
   ventana->display();
 }
@@ -112,6 +122,7 @@ void Juego::procesarEvento(){
         exit(1);
         break;
      case Event::KeyPressed:
+     if(Keyboard::isKeyPressed(Keyboard::Z))gameMenu=false;
       if(Keyboard::isKeyPressed(Keyboard::Up)){
         int h=4;
         if(h>=y0) break;

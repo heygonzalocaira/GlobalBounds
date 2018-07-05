@@ -10,7 +10,7 @@ Flecha::Flecha(){
   angulo=0;
 }
 void Flecha::actualizarF(float tiemp){
-  if(tiemp < 1 ) spr_flecha->rotate(10);
+  if(tiemp < 3 ) spr_flecha->rotate(10);
   /*tiemp/=10;
   spr_flecha->setPosition(spr_personaje->getPosition().x /2.f, (spr_personaje->getPosition().y /2.f)+10);
   spr_flecha->setOrigin((float)(spr_flecha->gettexture()->getSize().x), (float)(spr_flecha->gettexture()->getSize().y));

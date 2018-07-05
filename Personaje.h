@@ -15,7 +15,8 @@ public:
   void derecha();
   void arriba();
   void abajo();
-
+  double getpositionX();
+  double getpositionY();
 private:
   Sprite *spr_personaje;
   Texture *txt_personaje;

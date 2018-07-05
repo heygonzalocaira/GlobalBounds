@@ -74,7 +74,7 @@ Juego::Juego(Vector2f resolucion,String titulo){
   tiempo2 = 0.f;
   evento = new Event;
 
-
+  musica->suenaCancion();
   gameLoop();
 }
 void Juego::dibujar(){
@@ -138,8 +138,7 @@ void Juego::procesarEvento(){
         //spr_juegoP->setPosition(spr_juegoP->getPosition().x+5,spr_juegoP->getPosition().y);
         jugador1->derecha();
     }
-    //if(Keyboard::isKeyPressed(Keyboard::Z))
-    //musica->suenaCancion();
+
     if(Keyboard::isKeyPressed(Keyboard::X))musica->suenaSonido();
 
     }

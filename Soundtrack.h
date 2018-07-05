@@ -19,7 +19,7 @@ SoundTrack::SoundTrack(){
   sonido.setBuffer(buffer);
   Cancion.openFromFile("SOUND/After Dark.ogg");
 
-  Cancion.setVolume(80);
+  Cancion.setVolume(60);
   //Cancion.setPitch(1.2);
   Cancion.setLoop(true);
 }

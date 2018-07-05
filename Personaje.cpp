@@ -8,7 +8,7 @@ Personaje::Personaje(){
 
   txt_personaje->loadFromFile("Sprites/frames.png");
   spr_personaje = new Sprite(*txt_personaje);
-  spr_personaje->setPosition(100,320);
+  spr_personaje->setPosition(100,325);
   velocidad.x=0;
   velocidad.y=0;
 
@@ -16,7 +16,7 @@ Personaje::Personaje(){
   aceleracion.y=0;
 
   division_sprites.x=4;
-  division_sprites.y=1;
+  division_sprites.y=2;
   frame_actual.x=0;
   frame_actual.y=0;
   set_frame(*spr_personaje,{0,0});

@@ -90,7 +90,7 @@ void Juego::dibujar(){
   dibujarMenu();
   if(gameMenu == false){
     ventana->clear();
-    jugador1->frame_loop();s
+    jugador1->frame_loop();
     granada->actualizar(tiempo2);
     puntero->actualizarF(tiempo2);
     ventana->draw(*spr_brackground);

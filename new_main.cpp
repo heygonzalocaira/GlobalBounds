@@ -98,6 +98,7 @@ void Juego::dibujar(){
   if(gameMenu == false){
     ventana->clear();
     jugador1->frame_loop();
+    jugador1->actualizar(tiempo2);
     granada->actualizar(tiempo2);
     puntero->actualizarF(tiempo2);
     ventana->draw(*spr_brackground);
@@ -136,10 +137,9 @@ void Juego::procesarEvento(){
         int h=4;
         if(h>=y0) break;
         else jugador1->arriba();
-
       }
       else if(Keyboard::isKeyPressed(Keyboard::Down)){
-        int h1=580;
+        int h1=500;
         if(h1<=y0)break;
         else jugador1->abajo();
     }

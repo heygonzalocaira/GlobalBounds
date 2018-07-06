@@ -51,9 +51,11 @@ void Personaje::derecha(){
   spr_personaje->setPosition(spr_personaje->getPosition().x+5,spr_personaje->getPosition().y);
 }
 void Personaje::arriba(){
+  //velocidad.x+=30;
   spr_personaje->setPosition(spr_personaje->getPosition().x,spr_personaje->getPosition().y-5);
 }
 void Personaje::abajo(){
+  //velocidad.y+=30;
   spr_personaje->setPosition(spr_personaje->getPosition().x,spr_personaje->getPosition().y+5);
 }
 double Personaje::getpositionX(){

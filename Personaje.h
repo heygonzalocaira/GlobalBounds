@@ -29,7 +29,7 @@ private:
   friend class Juego;
 };
 
-
+/*
 class Command{
 public:
   virtual void execute()=0;
@@ -66,4 +66,4 @@ public:
   void accion2(){
     accion2Command.execute();
   }
-};
+};*/

@@ -1,5 +1,5 @@
 
-/*#include <SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include "Personaje.h"
 
 using namespace sf;
@@ -40,4 +40,4 @@ public:
   void accion2(){
     accion2Command.execute();
   }
-};*/
+};

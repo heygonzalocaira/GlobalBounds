@@ -6,6 +6,7 @@
 #include "Flecha.h"
 #include "Soundtrack.h"
 #include "Menu.h"
+#include "Command.h"
 
 using namespace sf;
 using namespace std;
@@ -41,6 +42,9 @@ private:
   Sprite *spr_brackground;
 
   Personaje *jugador1;
+  IzquierdaCommand *left;
+  DerechaCommand *right;
+  Manejador *interruptor;
   Proyectil *granada;
   Flecha *puntero;
   SoundTrack *musica;
@@ -72,6 +76,9 @@ Juego::Juego(Vector2f resolucion,String titulo){
   tiempo1 = new Time();
 
   jugador1=new Personaje();
+  left= new IzquierdaCommand(*jugador1);
+  right= new DerechaCommand(*jugador1);
+  interruptor = new Manejador(left,right);
   granada=new Proyectil();
   puntero = new Flecha();
   musica= new SoundTrack();
@@ -141,7 +148,8 @@ void Juego::procesarEvento(){
         if(h1>=x0)break;
         else
         //spr_juegoP->setPosition(spr_juegoP->getPosition().x-5,spr_juegoP->getPosition().y);
-        jugador1->izquierda();
+        //jugador1->izquierda();
+        interruptor->accion1();
 
       }
       else if(Keyboard::isKeyPressed(Keyboard::Right)){
@@ -149,7 +157,8 @@ void Juego::procesarEvento(){
         if(h2<=x0)break;
         else
         //spr_juegoP->setPosition(spr_juegoP->getPosition().x+5,spr_juegoP->getPosition().y);
-        jugador1->derecha();
+        //jugador1->derecha();
+        interruptor->accion2();
     }
 
     if(Keyboard::isKeyPressed(Keyboard::X))musica->suenaSonido();

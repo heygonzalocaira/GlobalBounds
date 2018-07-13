@@ -58,9 +58,9 @@ void Personaje::abajo(){
   //velocidad.y+=30;
   spr_personaje->setPosition(spr_personaje->getPosition().x,spr_personaje->getPosition().y+5);
 }
-double Personaje::getpositionX(){
+float Personaje::getpositionX(){
   return spr_personaje->getPosition().x;
 }
-double Personaje::getpositionY(){
+float Personaje::getpositionY(){
   return spr_personaje->getPosition().y;
 }

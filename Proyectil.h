@@ -8,6 +8,7 @@ using namespace std;
 class Proyectil{
 public:
   Proyectil();
+  ~Proyectil()= default;
   void actualizar(float tiemp);
   Sprite get_sprite1(){return *spr_proyectil;}
 private:

@@ -17,8 +17,8 @@ public:
   void abajo();
   void set_frame(Sprite &spr_p,Vector2i numero_frame);
   void frame_loop();
-  double getpositionX();
-  double getpositionY();
+  float getpositionX();
+  float getpositionY();
 private:
   Sprite *spr_personaje;
   Texture *txt_personaje;

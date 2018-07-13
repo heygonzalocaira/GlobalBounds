@@ -56,11 +56,6 @@ Juego::Juego(Vector2f resolucion,String titulo){
   spr_brackground = new Sprite(*txt_background);
   spr_brackground->setPosition(0,0);
 
-  /*txt_juegoP = new Texture;
-  txt_juegoP->loadFromFile("Sprites/heroe.png");
-  spr_juegoP = new Sprite(*txt_juegoP);
-  spr_juegoP->setPosition(600,320);*/
-
   reloj1 = new Clock();
   tiempo1 = new Time();
 
@@ -69,7 +64,7 @@ Juego::Juego(Vector2f resolucion,String titulo){
   right= new DerechaCommand(*jugador1);
   interruptor = new Manejador(left,right);
   granada=new Proyectil();
-  puntero = new Flecha();
+  puntero = new Flecha({jugador1->get_sprite().getPosition()});
   musica= new SoundTrack();
   menu = new MenuJuego();
   tiempo2 = 0.f;

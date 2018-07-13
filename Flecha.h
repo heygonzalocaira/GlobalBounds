@@ -6,7 +6,7 @@ using namespace std;
 
 class Flecha{
 public:
-  Flecha();
+  Flecha(Vector2f pos);
   void rotarPositivo();
   void rotarNegativo();
   Sprite get_sprite2(){return *spr_flecha;}

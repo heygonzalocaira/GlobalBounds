@@ -11,6 +11,7 @@ public:
   void dibujar();
   void dibujarMenu();
   void procesarEvento();
+  void procesarColision();
 private:
   RenderWindow *ventana;
 
@@ -30,6 +31,7 @@ private:
   Texture *txt_background;
   Sprite *spr_brackground;
 
+  Ground *piso;
   Personaje *jugador1;
   IzquierdaCommand *left;
   DerechaCommand *right;
@@ -59,11 +61,12 @@ Juego::Juego(Vector2f resolucion,String titulo){
   reloj1 = new Clock();
   tiempo1 = new Time();
 
+  piso = new Ground();
   jugador1=new Personaje();
   left= new IzquierdaCommand(*jugador1);
   right= new DerechaCommand(*jugador1);
   interruptor = new Manejador(left,right);
-  granada=new Proyectil();
+  granada=new Proyectil({jugador1->get_sprite().getPosition()},{40,-80});
   puntero = new Flecha({jugador1->get_sprite().getPosition()});
   musica= new SoundTrack();
   menu = new MenuJuego();
@@ -85,6 +88,7 @@ void Juego::dibujar(){
     jugador1->actualizar(tiempo2);
     granada->actualizar(tiempo2);
     ventana->draw(*spr_brackground);
+    ventana->draw(piso->getGround());
     ventana->draw(jugador1->get_sprite());
     ventana->draw(granada->get_sprite1());
     ventana->draw(puntero->get_sprite2());
@@ -100,10 +104,15 @@ void Juego::gameLoop(){
       tiempo2 = tiempo1->asSeconds();
       dibujar();
     }
+  procesarColision();
    procesarEvento();
   }
 }
-
+void Juego::procesarColision(){
+  if(jugador1->get_sprite().getGlobalBounds().intersects(piso->getGround().getGlobalBounds())){
+    jugador1->freno();
+  }
+}
 void Juego::procesarEvento(){
 
   x0=jugador1->getpositionX();

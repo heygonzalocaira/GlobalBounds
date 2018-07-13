@@ -19,6 +19,7 @@ public:
   void frame_loop();
   float getpositionX();
   float getpositionY();
+  void freno();
 private:
   Sprite *spr_personaje;
   Texture *txt_personaje;

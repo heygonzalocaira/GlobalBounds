@@ -8,18 +8,21 @@ Personaje::Personaje(){
 
   txt_personaje->loadFromFile("Sprites/frames.png");
   spr_personaje = new Sprite(*txt_personaje);
-  spr_personaje->setPosition(100,325);
+  spr_personaje->setPosition(50,100);
   velocidad.x=0;
   velocidad.y=0;
 
   aceleracion.x=0;
-  aceleracion.y=0;
+  aceleracion.y=9.8;
 
   division_sprites.x=4;
   division_sprites.y=2;
   frame_actual.x=0;
   frame_actual.y=0;
   set_frame(*spr_personaje,{0,0});
+}
+void Personaje::freno(){
+  aceleracion.y=-9.8;
 }
 void Personaje::set_frame(Sprite &spr_p,Vector2i numero_frame){
   IntRect posicion(numero_frame.x*spr_personaje->getTexture()->getSize().x/division_sprites.x,numero_frame.y*spr_personaje->getTexture()->getSize().y/division_sprites.y,spr_personaje->getTexture()->getSize().x/division_sprites.x,spr_personaje->getTexture()->getSize().y/division_sprites.y);

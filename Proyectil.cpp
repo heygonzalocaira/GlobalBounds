@@ -3,17 +3,16 @@
 
 
 
-Proyectil::Proyectil(){
+Proyectil::Proyectil(Vector2f pos,Vector2f vel){
   txt_proyectil = new Texture;
 
   txt_proyectil->loadFromFile("Sprites/bomba.png");
 
   spr_proyectil = new Sprite(*txt_proyectil);
-  spr_proyectil->setPosition(120,320);
+  spr_proyectil->setPosition(pos);
   spr_proyectil->setOrigin(spr_proyectil->getTexture()->getSize().x/2.f,spr_proyectil->getTexture()->getSize().y/2.f);
 
-  velocidad.x=50;
-  velocidad.y=-50;
+  velocidad=vel;
 
   aceleracion.x=0;
   aceleracion.y=9.8;

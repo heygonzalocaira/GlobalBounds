@@ -7,6 +7,7 @@
 #include "Soundtrack.h"
 #include "Menu.h"
 #include "Command.h"
+#include "terreno.h"
 
 using namespace sf;
 using namespace std;

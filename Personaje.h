@@ -27,6 +27,7 @@ private:
   Vector2i division_sprites;
   Vector2i frame_actual;
   friend class Juego;
+  friend class Flecha;
 };
 
 /*

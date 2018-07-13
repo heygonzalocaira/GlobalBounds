@@ -7,7 +7,8 @@ using namespace std;
 class Flecha{
 public:
   Flecha();
-  void actualizarF(float tiemp);
+  void rotarPositivo();
+  void rotarNegativo();
   Sprite get_sprite2(){return *spr_flecha;}
   int angulo;
 private:

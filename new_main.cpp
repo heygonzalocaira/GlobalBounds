@@ -89,7 +89,6 @@ void Juego::dibujar(){
     jugador1->frame_loop();
     jugador1->actualizar(tiempo2);
     granada->actualizar(tiempo2);
-    puntero->actualizarF(tiempo2);
     ventana->draw(*spr_brackground);
     ventana->draw(jugador1->get_sprite());
     ventana->draw(granada->get_sprite1());
@@ -149,7 +148,8 @@ void Juego::procesarEvento(){
         //jugador1->derecha();
         interruptor->accion2();
     }
-
+    if(Keyboard::isKeyPressed(Keyboard::Q))puntero->rotarNegativo();
+    if(Keyboard::isKeyPressed(Keyboard::E))puntero->rotarPositivo();
     if(Keyboard::isKeyPressed(Keyboard::X))musica->suenaSonido();
     if(Keyboard::isKeyPressed(Keyboard::C))gameOver=true;
     }

@@ -9,6 +9,8 @@ public:
   Flecha(Vector2f pos);
   void rotarPositivo();
   void rotarNegativo();
+  void setPosition(Vector2f pos);
+  Vector2f getPosition();
   Sprite get_sprite2(){return *spr_flecha;}
   int angulo;
 private:

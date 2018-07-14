@@ -1,8 +1,5 @@
 
 #include "linker.h"
-// Aun falta implementar esta clase
-class Mira;
-
 
 class Juego{
 public:
@@ -66,14 +63,16 @@ Juego::Juego(Vector2f resolucion,String titulo){
   left= new IzquierdaCommand(*jugador1);
   right= new DerechaCommand(*jugador1);
   interruptor = new Manejador(left,right);
-  granada=new Proyectil({jugador1->get_sprite().getPosition()},{40,-80});
+
+  //granada=new Proyectil({jugador1->get_sprite().getPosition()},{60,-40});
+  granada=new Proyectil({700,250},{-60,-40});
   puntero = new Flecha({jugador1->get_sprite().getPosition()});
   musica= new SoundTrack();
   menu = new MenuJuego();
   tiempo2 = 0.f;
   evento = new Event;
 
-  musica->suenaCancion();
+
   gameLoop();
 }
 void Juego::dibujarMenu(){
@@ -102,15 +101,22 @@ void Juego::gameLoop(){
     *tiempo1 = reloj1->getElapsedTime();
     if(tiempo1->asSeconds()>tiempo2+fps){
       tiempo2 = tiempo1->asSeconds();
+
+      //Vector2f pos = puntero->getPosition().x + movec
+      //puntero->setPosition(pos);
+
       dibujar();
     }
-  procesarColision();
-   procesarEvento();
+    procesarColision();
+    procesarEvento();
   }
 }
 void Juego::procesarColision(){
   if(jugador1->get_sprite().getGlobalBounds().intersects(piso->getGround().getGlobalBounds())){
     jugador1->freno();
+  }
+  if(jugador1->get_sprite().getGlobalBounds().intersects(granada->get_sprite1().getGlobalBounds())){
+    jugador1->restavida();
   }
 }
 void Juego::procesarEvento(){
@@ -154,7 +160,7 @@ void Juego::procesarEvento(){
     }
     if(Keyboard::isKeyPressed(Keyboard::Q))puntero->rotarNegativo();
     if(Keyboard::isKeyPressed(Keyboard::E))puntero->rotarPositivo();
-    if(Keyboard::isKeyPressed(Keyboard::X))musica->suenaSonido();
+    //if(Keyboard::isKeyPressed(Keyboard::X))musica->suenaSonido();
     if(Keyboard::isKeyPressed(Keyboard::C))gameOver=true;
     }
   }

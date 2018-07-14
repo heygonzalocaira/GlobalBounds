@@ -17,3 +17,11 @@ void Flecha::rotarNegativo(){
 void Flecha::rotarPositivo(){
   spr_flecha->rotate(10);
 }
+
+void Flecha::setPosition(Vector2f pos) {
+  spr_flecha->setPosition(pos);
+}
+
+Vector2f Flecha::getPosition() {
+  return spr_flecha->getPosition();
+}

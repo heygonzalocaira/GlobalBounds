@@ -8,6 +8,7 @@
 #include "Menu.h"
 #include "Command.h"
 #include "terreno.h"
+#include "Contador.h"
 
 using namespace sf;
 using namespace std;

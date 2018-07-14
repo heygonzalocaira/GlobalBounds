@@ -29,6 +29,7 @@ private:
   Vector2i division_sprites;
   Vector2i frame_actual;
   int vida;
+  int voltear;
   friend class Juego;
   friend class Flecha;
 };

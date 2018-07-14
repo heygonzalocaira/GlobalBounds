@@ -35,6 +35,7 @@ private:
   Manejador *interruptor;
   Proyectil *granada;
   Flecha *puntero;
+  Contador *contador;
   SoundTrack *musica;
   MenuJuego *menu;
 };
@@ -69,10 +70,11 @@ Juego::Juego(Vector2f resolucion,String titulo){
   puntero = new Flecha({jugador1->get_sprite().getPosition()});
   musica= new SoundTrack();
   menu = new MenuJuego();
+  contador = new Contador();
   tiempo2 = 0.f;
   evento = new Event;
 
-
+  musica->suenaCancion();
   gameLoop();
 }
 void Juego::dibujarMenu(){
@@ -91,6 +93,8 @@ void Juego::dibujar(){
     ventana->draw(jugador1->get_sprite());
     ventana->draw(granada->get_sprite1());
     ventana->draw(puntero->get_sprite2());
+    ventana->draw(contador->getContador());
+    contador->frame_loop();
     ventana->display();
   }
   //ventana->draw(*spr_juegoP);
@@ -114,6 +118,8 @@ void Juego::gameLoop(){
 void Juego::procesarColision(){
   if(jugador1->get_sprite().getGlobalBounds().intersects(piso->getGround().getGlobalBounds())){
     jugador1->freno();
+  }else{
+    jugador1->aceleracion.y=9.8;
   }
   if(jugador1->get_sprite().getGlobalBounds().intersects(granada->get_sprite1().getGlobalBounds())){
     jugador1->restavida();
@@ -134,7 +140,7 @@ void Juego::procesarEvento(){
       if(Keyboard::isKeyPressed(Keyboard::Up)){
         int h=4;
         if(h>=y0) break;
-        else jugador1->arriba();
+        else {jugador1->arriba();}
       }
       else if(Keyboard::isKeyPressed(Keyboard::Down)){
         int h1=500;
@@ -153,14 +159,14 @@ void Juego::procesarEvento(){
       else if(Keyboard::isKeyPressed(Keyboard::Right)){
         int h2=760;
         if(h2<=x0)break;
-        else
+        else{
         //spr_juegoP->setPosition(spr_juegoP->getPosition().x+5,spr_juegoP->getPosition().y);
         //jugador1->derecha();
-        interruptor->accion2();
+        interruptor->accion2();}
     }
     if(Keyboard::isKeyPressed(Keyboard::Q))puntero->rotarNegativo();
     if(Keyboard::isKeyPressed(Keyboard::E))puntero->rotarPositivo();
-    //if(Keyboard::isKeyPressed(Keyboard::X))musica->suenaSonido();
+    if(Keyboard::isKeyPressed(Keyboard::X))musica->suenaSonido();
     if(Keyboard::isKeyPressed(Keyboard::C))gameOver=true;
     }
   }

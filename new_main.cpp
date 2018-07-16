@@ -21,6 +21,7 @@ private:
   bool gameOver=false;
   float fps;
   int x0,y0;
+  int turno;
 
   Event *evento;
 
@@ -82,7 +83,7 @@ Juego::Juego(Vector2f resolucion,String titulo){
   contador = new Contador();
   tiempo2 = 0.f;
   evento = new Event;
-
+  turno=0;
   musica->suenaCancion();
   gameLoop();
 }
@@ -100,6 +101,7 @@ void Juego::dibujar(){
     ventana->clear();
     jugador1->frame_loop();
     jugador1->actualizar(tiempo2);
+    jugador2->actualizar(tiempo2);
     granada->actualizar(tiempo2);
     //zapdos->actualizar(tiempo2);
     tnt->actualizar2(tiempo2);
@@ -112,8 +114,9 @@ void Juego::dibujar(){
     ventana->draw(granada->get_sprite1());
     ventana->draw(tnt->get_sprite2());
     ventana->draw(puntero->get_sprite2());
-    ventana->draw(contador->getContador());
     ventana->draw(zapdos->getSprite());
+    ventana->draw(contador->getContador());
+
     //bombas();
     contador->frame_loop();
     ventana->display();
@@ -145,11 +148,20 @@ void Juego::procesarColision(){
   if(jugador1->get_sprite().getGlobalBounds().intersects(granada->get_sprite1().getGlobalBounds())){
     jugador1->restavida();
   }
+  if(jugador2->get_sprite().getGlobalBounds().intersects(piso->getGround().getGlobalBounds())){
+    jugador2->freno();
+  }else{
+    jugador2->aceleracion.y=9.8;
+  }
+  if(jugador1->get_sprite().getGlobalBounds().intersects(granada->get_sprite1().getGlobalBounds())){
+    jugador2->restavida();
+  }
 }
 void Juego::procesarEvento(){
 
   x0=jugador1->getpositionX();
   y0=jugador1->getpositionY();
+  int h=4;int h1=500;int h2=5;int h3=760;
   while(ventana->pollEvent(*evento)){
     switch (evento->type) {
      case Event::Closed:
@@ -159,36 +171,43 @@ void Juego::procesarEvento(){
      case Event::KeyPressed:
      if(Keyboard::isKeyPressed(Keyboard::Z))gameMenu=false;
       if(Keyboard::isKeyPressed(Keyboard::Up)){
-        int h=4;
         if(h>=y0) break;
-        else {jugador1->arriba();}
+        else {
+          if(turno==0)jugador1->arriba();
+          if(turno==1)jugador2->arriba();
+        }
       }
-      else if(Keyboard::isKeyPressed(Keyboard::Down)){
-        int h1=500;
+    /*else if(Keyboard::isKeyPressed(Keyboard::Down)){
+
         if(h1<=y0)break;
-        else jugador1->abajo();
-    }
+        else {
+          if(turno==0)jugador1->abajo();
+          if(turno==1)jugador2->abajo();
+        }//jugador1->abajo();
+    }*/
       else if(Keyboard::isKeyPressed(Keyboard::Left)){
-        int h1=5;
-        if(h1>=x0)break;
-        else
-        //spr_juegoP->setPosition(spr_juegoP->getPosition().x-5,spr_juegoP->getPosition().y);
-        //jugador1->izquierda();
-        interruptor->accion1();
+        if(h2>=x0)break;
+        else{
+          if(turno==0)interruptor->accion1();
+          if(turno==1)jugador2->izquierda();
+        }
+        //interruptor->accion1();
 
       }
       else if(Keyboard::isKeyPressed(Keyboard::Right)){
-        int h2=760;
-        if(h2<=x0)break;
+
+        if(h3<=x0)break;
         else{
-        //spr_juegoP->setPosition(spr_juegoP->getPosition().x+5,spr_juegoP->getPosition().y);
-        //jugador1->derecha();
-        interruptor->accion2();}
+          if(turno==0)interruptor->accion2();
+          if(turno==1)jugador2->derecha();
+        }
     }
     if(Keyboard::isKeyPressed(Keyboard::Q))puntero->rotarNegativo();
     if(Keyboard::isKeyPressed(Keyboard::E))puntero->rotarPositivo();
     if(Keyboard::isKeyPressed(Keyboard::X))musica->suenaSonido();
     if(Keyboard::isKeyPressed(Keyboard::C))gameOver=true;
+    if(Keyboard::isKeyPressed(Keyboard::V))turno=1;
+    if(Keyboard::isKeyPressed(Keyboard::B))turno=0;
     }
   }
 }

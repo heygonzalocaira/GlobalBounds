@@ -6,7 +6,7 @@ using namespace sf;
 class Contador{
 public:
   Contador();
-  Sprite getContador(){return *spr_contador;}
+  Sprite getSprite(){return *spr_contador;}
   void set_frame(Sprite &spr_p,Vector2i numero_frame);
   void frame_loop();
   void iniciar();

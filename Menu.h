@@ -9,7 +9,7 @@ public:
   void play();
   void options();
   void exit();
-  Sprite getMenu(){return *spr_menu;};
+  Sprite getSprite(){return *spr_menu;};
 private:
   Texture *txt_menu;
   Sprite *spr_menu;

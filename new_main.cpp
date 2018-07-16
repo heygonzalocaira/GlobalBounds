@@ -94,7 +94,7 @@ void Juego::bombas(){
     ventana->draw(zapdos->getShape());
 }
 void Juego::dibujarMenu(){
-  ventana->draw(menu->getMenu());
+  ventana->draw(menu->getSprite());
 }
 void Juego::dibujar(){
   ventana->clear();
@@ -105,7 +105,7 @@ void Juego::dibujar(){
     jugador1->actualizar(tiempo2);
     jugador2->actualizar(tiempo2);
     ventana->draw(*spr_brackground);
-    ventana->draw(piso->getGround());
+    ventana->draw(piso->getSprite());
     ventana->draw(jugador1->getSprite());
     ventana->draw(jugador2->getSprite());
     ventana->draw(jugador1->getShape());
@@ -117,9 +117,9 @@ void Juego::dibujar(){
       granada->actualizar(tiempo2);
       tnt->actualizar2(tiempo2);
     }
-    ventana->draw(puntero->get_sprite2());
+    ventana->draw(puntero->getSprite());
     ventana->draw(zapdos->getSprite());
-    ventana->draw(contador->getContador());
+    ventana->draw(contador->getSprite());
 
     //bombas();
     contador->frame_loop();
@@ -143,7 +143,7 @@ void Juego::gameLoop(){
   }
 }
 void Juego::procesarColision(){
-  if(jugador1->getSprite().getGlobalBounds().intersects(piso->getGround().getGlobalBounds())){
+  if(jugador1->getSprite().getGlobalBounds().intersects(piso->getSprite().getGlobalBounds())){
     jugador1->freno();
   }else{
     jugador1->aceleracion.y=7;
@@ -151,7 +151,7 @@ void Juego::procesarColision(){
   if(jugador1->getSprite().getGlobalBounds().intersects(granada->get_sprite1().getGlobalBounds())){
     jugador1->restavida();
   }
-  if(jugador2->getSprite().getGlobalBounds().intersects(piso->getGround().getGlobalBounds())){
+  if(jugador2->getSprite().getGlobalBounds().intersects(piso->getSprite().getGlobalBounds())){
     jugador2->freno();
   }else{
     jugador2->aceleracion.y=9.8;
@@ -210,6 +210,7 @@ void Juego::procesarEvento(){
       float angulo_mira = puntero->angulo();
       //cout<<angulo_mira<<endl;
       cout<<granada->velocidad.x<<" "<<granada->velocidad.y<<endl;
+      musica->suenaSonido();
       if(turno==1){
         granada=new Proyectil({jugador2->getpositionX(),jugador2->getpositionY()},{potencia_disparo * cos(gradosaradianes(angulo_mira)),potencia_disparo*sin(gradosaradianes(angulo_mira))});
         //granada->restaurar();
@@ -221,7 +222,7 @@ void Juego::procesarEvento(){
     }
     if(Keyboard::isKeyPressed(Keyboard::Q))puntero->rotarNegativo();
     if(Keyboard::isKeyPressed(Keyboard::E))puntero->rotarPositivo();
-    if(Keyboard::isKeyPressed(Keyboard::X))musica->suenaSonido();
+    //if(Keyboard::isKeyPressed(Keyboard::X))musica->suenaSonido();
     if(Keyboard::isKeyPressed(Keyboard::C))gameOver=true;
     if(Keyboard::isKeyPressed(Keyboard::V))turno=1;
     if(Keyboard::isKeyPressed(Keyboard::B))turno=0;

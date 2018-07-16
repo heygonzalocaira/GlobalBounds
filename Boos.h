@@ -5,7 +5,7 @@
 
 using namespace sf;
 
-class Boos{
+class Boos:public Dibujo{
 public:
   Boos();
   Sprite getSprite(){return *spr_boos;}

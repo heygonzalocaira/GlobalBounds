@@ -86,4 +86,8 @@ void Personaje::colorvida(){
     cajavida->setFillColor(Color::Yellow);
   else if(vida<50 && vida >30)
     cajavida->setFillColor(Color::Red);
+  else if(vida<30 && vida >10)
+      cajavida->setFillColor(Color::Blue);
+  else if(vida == 0)
+      cajavida->setFillColor(Color::Black);
 }

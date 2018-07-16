@@ -4,10 +4,10 @@
 
 using namespace sf;
 
-class Ground{
+class Ground:public Dibujo{
 public:
   Ground();
-  Sprite getGround(){return *spr_ground;}
+  Sprite getSprite(){return *spr_ground;}
   int idGround(){return id;}
 private:
   Texture *txt_ground;

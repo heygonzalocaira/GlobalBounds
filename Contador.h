@@ -18,10 +18,10 @@ private:
 };
 Contador::Contador(){
   txt_contador = new Texture;
-  txt_contador -> loadFromFile("Sprites/contador1.png");
+  txt_contador -> loadFromFile("Sprites/contador60.png");
   spr_contador = new Sprite(*txt_contador);
-  spr_contador->setPosition(350,50);
-  division_sprites.x=16;
+  spr_contador->setPosition(600,60);
+  division_sprites.x=62;
   division_sprites.y=1;
   frame_actual.x=0;
   frame_actual.y=0;

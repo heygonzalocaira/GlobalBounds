@@ -20,7 +20,7 @@ Proyectil::Proyectil(Vector2f pos,Vector2f vel){
   spr_proyectil2->setOrigin(spr_proyectil2->getTexture()->getSize().x/2.f,spr_proyectil2->getTexture()->getSize().y/2.f);
 
   velocidad=vel;
-
+  copia=vel;
   aceleracion.x=0;
   aceleracion.y=9.8;
 
@@ -31,15 +31,14 @@ void Proyectil::actualizar(float tiemp){
   velocidad.y+=aceleracion.y *tiemp;
   spr_proyectil->setPosition(spr_proyectil->getPosition().x+velocidad.x*tiemp,spr_proyectil->getPosition().y+velocidad.y*tiemp);
   spr_proyectil->rotate(5);
-  // borrar este IF para que solo se dibuje una vez
-  /*if(spr_proyectil->getPosition().x> 500 && spr_proyectil-> getPosition().y >400 ){
-
-    velocidad.x=50;
-    velocidad.y=-50;
-    aceleracion.x=0;
-    aceleracion.y=9.8;
-    spr_proyectil->setPosition(120,320);
-  }*/
+  if(velocidad.x >250 || velocidad.y >250){
+    velocidad.x=70;
+    velocidad.y=70;
+  }
+}
+void Proyectil::restaurar(){
+  velocidad.x=copia.x;
+  velocidad.y=copia.y;
 }
 void Proyectil::actualizar2(float tiemp){
   tiemp/=10;

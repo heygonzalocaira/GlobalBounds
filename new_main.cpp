@@ -10,6 +10,8 @@ public:
   void bombas();
   void procesarEvento();
   void procesarColision();
+  float gradosaradianes(float grados){return grados*3.14 /180;}
+  float radianesagrados(float radianes){return radianes *180 /3.14;}
 private:
   RenderWindow *ventana;
 
@@ -67,8 +69,8 @@ Juego::Juego(Vector2f resolucion,String titulo){
   tiempo1 = new Time();
 
   piso = new Ground();
-  jugador1=new Personaje(100,250,50,50);
-  jugador2=new Personaje(600,250,600,50);
+  jugador1=new Personaje(100,150,50,50);
+  jugador2=new Personaje(600,150,600,50);
 
   left= new IzquierdaCommand(*jugador1);
   right= new DerechaCommand(*jugador1);
@@ -77,7 +79,7 @@ Juego::Juego(Vector2f resolucion,String titulo){
   //granada=new Proyectil({jugador1->get_sprite().getPosition()},{60,-40});
   granada=new Proyectil({700,350},{-60,-40});
   tnt=new Proyectil({150,350},{60,-40});
-  puntero = new Flecha({jugador1->get_sprite().getPosition()});
+  puntero = new Flecha({jugador1->getSprite().getPosition()});
   musica= new SoundTrack();
   menu = new MenuJuego();
   contador = new Contador();
@@ -102,17 +104,19 @@ void Juego::dibujar(){
     jugador1->frame_loop();
     jugador1->actualizar(tiempo2);
     jugador2->actualizar(tiempo2);
-    granada->actualizar(tiempo2);
-    //zapdos->actualizar(tiempo2);
-    tnt->actualizar2(tiempo2);
     ventana->draw(*spr_brackground);
     ventana->draw(piso->getGround());
-    ventana->draw(jugador1->get_sprite());
-    ventana->draw(jugador2->get_sprite());
+    ventana->draw(jugador1->getSprite());
+    ventana->draw(jugador2->getSprite());
     ventana->draw(jugador1->getShape());
     ventana->draw(jugador2->getShape());
-    ventana->draw(granada->get_sprite1());
-    ventana->draw(tnt->get_sprite2());
+
+    if(granada!=NULL && tnt!=NULL){
+      ventana->draw(granada->get_sprite1());
+      ventana->draw(tnt->get_sprite2());
+      granada->actualizar(tiempo2);
+      tnt->actualizar2(tiempo2);
+    }
     ventana->draw(puntero->get_sprite2());
     ventana->draw(zapdos->getSprite());
     ventana->draw(contador->getContador());
@@ -132,7 +136,6 @@ void Juego::gameLoop(){
 
       //Vector2f pos = puntero->getPosition().x + movec
       //puntero->setPosition(pos);
-
       dibujar();
     }
     procesarColision();
@@ -140,20 +143,20 @@ void Juego::gameLoop(){
   }
 }
 void Juego::procesarColision(){
-  if(jugador1->get_sprite().getGlobalBounds().intersects(piso->getGround().getGlobalBounds())){
+  if(jugador1->getSprite().getGlobalBounds().intersects(piso->getGround().getGlobalBounds())){
     jugador1->freno();
   }else{
-    jugador1->aceleracion.y=9.8;
+    jugador1->aceleracion.y=7;
   }
-  if(jugador1->get_sprite().getGlobalBounds().intersects(granada->get_sprite1().getGlobalBounds())){
+  if(jugador1->getSprite().getGlobalBounds().intersects(granada->get_sprite1().getGlobalBounds())){
     jugador1->restavida();
   }
-  if(jugador2->get_sprite().getGlobalBounds().intersects(piso->getGround().getGlobalBounds())){
+  if(jugador2->getSprite().getGlobalBounds().intersects(piso->getGround().getGlobalBounds())){
     jugador2->freno();
   }else{
     jugador2->aceleracion.y=9.8;
   }
-  if(jugador1->get_sprite().getGlobalBounds().intersects(granada->get_sprite1().getGlobalBounds())){
+  if(jugador1->getSprite().getGlobalBounds().intersects(granada->get_sprite1().getGlobalBounds())){
     jugador2->restavida();
   }
 }
@@ -201,6 +204,20 @@ void Juego::procesarEvento(){
           if(turno==0)interruptor->accion2();
           if(turno==1)jugador2->derecha();
         }
+    }
+    if(Keyboard::isKeyPressed(Keyboard::Space)){
+      float potencia_disparo=70;
+      float angulo_mira = puntero->angulo();
+      //cout<<angulo_mira<<endl;
+      cout<<granada->velocidad.x<<" "<<granada->velocidad.y<<endl;
+      if(turno==1){
+        granada=new Proyectil({jugador2->getpositionX(),jugador2->getpositionY()},{potencia_disparo * cos(gradosaradianes(angulo_mira)),potencia_disparo*sin(gradosaradianes(angulo_mira))});
+        //granada->restaurar();
+      }
+      if(turno==0){
+        tnt=new Proyectil({jugador1->getpositionX(),jugador1->getpositionY()},{potencia_disparo * cos(gradosaradianes(angulo_mira)),potencia_disparo*sin(gradosaradianes(angulo_mira))});
+        //tnt->restaurar();
+      }
     }
     if(Keyboard::isKeyPressed(Keyboard::Q))puntero->rotarNegativo();
     if(Keyboard::isKeyPressed(Keyboard::E))puntero->rotarPositivo();

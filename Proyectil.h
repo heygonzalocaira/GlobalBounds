@@ -11,6 +11,7 @@ public:
   ~Proyectil()= default;
   void actualizar(float tiemp);
   void actualizar2(float tiemp);
+  void restaurar();
   Sprite get_sprite1(){return *spr_proyectil;}
   Sprite get_sprite2(){return *spr_proyectil2;}
 private:
@@ -20,6 +21,7 @@ private:
   Texture *txt_proyectil2;
   Vector2f velocidad;
   Vector2f aceleracion;
+  Vector2f copia;
   friend class Juego;
 };
 

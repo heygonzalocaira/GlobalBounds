@@ -10,7 +10,7 @@ public:
   Personaje(int a,int b,int x,int y);
 
   void actualizar(float tiemp);
-  Sprite get_sprite(){return *spr_personaje;}
+  Sprite getSprite(){return *spr_personaje;}
   RectangleShape getShape(){return *cajavida;}
   void izquierda();
   void derecha();

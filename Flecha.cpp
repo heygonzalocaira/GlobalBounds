@@ -9,7 +9,7 @@ Flecha::Flecha(Vector2f pos){
   //spr_personaje->getPosition().x+32;
   spr_flecha->setPosition(pos);
   spr_flecha->setOrigin(spr_flecha->getTexture()->getSize().x/2.f,spr_flecha->getTexture()->getSize().y/2.f);
-  angulo=0;
+  //angulo=0;
 }
 void Flecha::rotarNegativo(){
   spr_flecha->rotate(-10);

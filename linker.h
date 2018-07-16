@@ -12,6 +12,7 @@
 #include "Boos.h"
 #include<stdlib.h>
 #include<time.h>
+#include <math.h>
 
 using namespace sf;
 using namespace std;

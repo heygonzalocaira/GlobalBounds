@@ -11,7 +11,7 @@ Personaje::Personaje(int a,int b,int x,int y){
   spr_personaje->setPosition(a,b);
   velocidad.x=0;
   velocidad.y=0;
-  cajavida = new RectangleShape({128,16});
+  cajavida = new RectangleShape({150,16});
   cajavida->setFillColor(Color::Green);
   cajavida->setPosition(x,y);
   aceleracion.x=0;
@@ -22,12 +22,13 @@ Personaje::Personaje(int a,int b,int x,int y){
   frame_actual.x=0;
   frame_actual.y=0;
   voltear =1;
-  set_frame(*spr_personaje,{0,0});
+  set_frame(*spr_personaje,{1,1});
 }
 void Personaje::freno(){
   aceleracion.y=0;
   velocidad.y=0;
   //cout<<aceleracion.y<<endl;
+  //set_frame(*spr_personaje,{0,0});
 }
 void Personaje::set_frame(Sprite &spr_p,Vector2i numero_frame){
   IntRect posicion(numero_frame.x*spr_personaje->getTexture()->getSize().x/division_sprites.x,numero_frame.y*spr_personaje->getTexture()->getSize().y/division_sprites.y,spr_personaje->getTexture()->getSize().x/division_sprites.x*voltear,spr_personaje->getTexture()->getSize().y/division_sprites.y);

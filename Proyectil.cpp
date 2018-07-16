@@ -35,6 +35,7 @@ void Proyectil::actualizar(float tiemp){
     velocidad.x=70;
     velocidad.y=70;
   }
+  restaurar();
 }
 void Proyectil::restaurar(){
   velocidad.x=copia.x;

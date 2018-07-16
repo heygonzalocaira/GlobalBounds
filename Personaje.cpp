@@ -45,6 +45,11 @@ void Personaje::actualizar(float tiemp){
   velocidad.x=aceleracion.x *tiemp;
   velocidad.y=aceleracion.y;
   spr_personaje->setPosition(spr_personaje->getPosition().x+velocidad.x*tiemp,spr_personaje->getPosition().y+velocidad.y*tiemp);
+  if(aceleracion.y>15){
+    //velocidad.x=70;
+    //velocidad.y=70;
+    aceleracion.y=5;
+  }
 }
 
 void Personaje::izquierda(){
@@ -62,7 +67,8 @@ void Personaje::derecha(){
   spr_personaje->setPosition(spr_personaje->getPosition().x+5,spr_personaje->getPosition().y);
 }
 void Personaje::arriba(){
-  velocidad.y=-10;
+  velocidad.y=-25;
+  aceleracion.y=0;
   spr_personaje->setPosition(spr_personaje->getPosition().x,spr_personaje->getPosition().y-5);
 }
 void Personaje::abajo(){

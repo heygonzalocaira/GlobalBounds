@@ -3,15 +3,17 @@
 #include "Personaje.h"
 
 
-Personaje::Personaje(){
+Personaje::Personaje(int a,int b,int x,int y){
   txt_personaje = new Texture;
 
   txt_personaje->loadFromFile("Sprites/frames.png");
   spr_personaje = new Sprite(*txt_personaje);
-  spr_personaje->setPosition(100,250);
+  spr_personaje->setPosition(a,b);
   velocidad.x=0;
   velocidad.y=0;
-
+  cajavida = new RectangleShape({128,16});
+  cajavida->setFillColor(Color::Green);
+  cajavida->setPosition(x,y);
   aceleracion.x=0;
   aceleracion.y=9.8;
   vida=100;
@@ -76,4 +78,11 @@ float Personaje::getpositionY(){
 void Personaje::restavida(){
   vida-=10;
   cout<<vida<<endl;
+  colorvida();
+}
+void Personaje::colorvida(){
+  if(vida<80 && vida >=50)
+    cajavida->setFillColor(Color::Yellow);
+  else if(vida<50 && vida >30)
+    cajavida->setFillColor(Color::Red);
 }

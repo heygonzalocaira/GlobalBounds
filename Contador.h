@@ -20,7 +20,7 @@ Contador::Contador(){
   txt_contador = new Texture;
   txt_contador -> loadFromFile("Sprites/contador1.png");
   spr_contador = new Sprite(*txt_contador);
-  spr_contador->setPosition(700,50);
+  spr_contador->setPosition(350,50);
   division_sprites.x=16;
   division_sprites.y=1;
   frame_actual.x=0;

@@ -18,6 +18,6 @@ Ground::Ground(){
   txt_ground = new Texture();
   txt_ground->loadFromFile("Sprites/piso.png");
   spr_ground = new Sprite(*txt_ground);
-  spr_ground->setPosition(0,350);
+  spr_ground->setPosition(0,431);
   id = 1;
 }

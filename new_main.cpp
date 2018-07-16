@@ -7,6 +7,7 @@ public:
   void gameLoop();
   void dibujar();
   void dibujarMenu();
+  void bombas();
   void procesarEvento();
   void procesarColision();
 private:
@@ -28,12 +29,15 @@ private:
   Texture *txt_background;
   Sprite *spr_brackground;
 
+  Boos *zapdos;
   Ground *piso;
   Personaje *jugador1;
+  Personaje *jugador2;
   IzquierdaCommand *left;
   DerechaCommand *right;
   Manejador *interruptor;
   Proyectil *granada;
+  Proyectil *tnt;
   Flecha *puntero;
   Contador *contador;
   SoundTrack *musica;
@@ -56,17 +60,22 @@ Juego::Juego(Vector2f resolucion,String titulo){
   spr_brackground = new Sprite(*txt_background);
   spr_brackground->setPosition(0,0);
 
+
+
   reloj1 = new Clock();
   tiempo1 = new Time();
 
   piso = new Ground();
-  jugador1=new Personaje();
+  jugador1=new Personaje(100,250,50,50);
+  jugador2=new Personaje(600,250,600,50);
+
   left= new IzquierdaCommand(*jugador1);
   right= new DerechaCommand(*jugador1);
   interruptor = new Manejador(left,right);
-
+  zapdos = new Boos();
   //granada=new Proyectil({jugador1->get_sprite().getPosition()},{60,-40});
-  granada=new Proyectil({700,250},{-60,-40});
+  granada=new Proyectil({700,350},{-60,-40});
+  tnt=new Proyectil({150,350},{60,-40});
   puntero = new Flecha({jugador1->get_sprite().getPosition()});
   musica= new SoundTrack();
   menu = new MenuJuego();
@@ -76,6 +85,10 @@ Juego::Juego(Vector2f resolucion,String titulo){
 
   musica->suenaCancion();
   gameLoop();
+}
+void Juego::bombas(){
+    zapdos->colocar();
+    ventana->draw(zapdos->getShape());
 }
 void Juego::dibujarMenu(){
   ventana->draw(menu->getMenu());
@@ -88,12 +101,20 @@ void Juego::dibujar(){
     jugador1->frame_loop();
     jugador1->actualizar(tiempo2);
     granada->actualizar(tiempo2);
+    //zapdos->actualizar(tiempo2);
+    tnt->actualizar2(tiempo2);
     ventana->draw(*spr_brackground);
     ventana->draw(piso->getGround());
     ventana->draw(jugador1->get_sprite());
+    ventana->draw(jugador2->get_sprite());
+    ventana->draw(jugador1->getShape());
+    ventana->draw(jugador2->getShape());
     ventana->draw(granada->get_sprite1());
+    ventana->draw(tnt->get_sprite2());
     ventana->draw(puntero->get_sprite2());
     ventana->draw(contador->getContador());
+    ventana->draw(zapdos->getSprite());
+    //bombas();
     contador->frame_loop();
     ventana->display();
   }
@@ -175,6 +196,6 @@ void Juego::procesarEvento(){
 
 
 int main(int argc, char const *argv[]) {
-  Juego partida({800,600},"Disparos");
+  Juego partida({800,500},"Disparos");
   return 0;
 }

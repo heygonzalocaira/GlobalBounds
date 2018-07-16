@@ -9,6 +9,9 @@
 #include "Command.h"
 #include "terreno.h"
 #include "Contador.h"
+#include "Boos.h"
+#include<stdlib.h>
+#include<time.h>
 
 using namespace sf;
 using namespace std;

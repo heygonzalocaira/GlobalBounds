@@ -7,10 +7,11 @@ using namespace std;
 
 class Personaje{
 public:
-  Personaje();
+  Personaje(int a,int b,int x,int y);
 
   void actualizar(float tiemp);
-  Sprite get_sprite(){return *spr_personaje;};
+  Sprite get_sprite(){return *spr_personaje;}
+  RectangleShape getShape(){return *cajavida;}
   void izquierda();
   void derecha();
   void arriba();
@@ -21,6 +22,7 @@ public:
   float getpositionY();
   void freno();
   void restavida();
+  void colorvida();
 private:
   Sprite *spr_personaje;
   Texture *txt_personaje;
@@ -28,6 +30,7 @@ private:
   Vector2f aceleracion;
   Vector2i division_sprites;
   Vector2i frame_actual;
+  RectangleShape *cajavida;
   int vida;
   int voltear;
   friend class Juego;

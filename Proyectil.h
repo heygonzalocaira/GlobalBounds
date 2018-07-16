@@ -10,10 +10,14 @@ public:
   Proyectil(Vector2f pos,Vector2f vel);
   ~Proyectil()= default;
   void actualizar(float tiemp);
+  void actualizar2(float tiemp);
   Sprite get_sprite1(){return *spr_proyectil;}
+  Sprite get_sprite2(){return *spr_proyectil2;}
 private:
   Sprite *spr_proyectil;
   Texture *txt_proyectil;
+  Sprite *spr_proyectil2;
+  Texture *txt_proyectil2;
   Vector2f velocidad;
   Vector2f aceleracion;
   friend class Juego;

@@ -133,6 +133,7 @@ void Juego::gameLoop(){
     *tiempo1 = reloj1->getElapsedTime();
     if(tiempo1->asSeconds()>tiempo2+fps){
       tiempo2 = tiempo1->asSeconds();
+
       //Vector2f pos = puntero->getPosition().x + movec
       //puntero->setPosition(pos);
       dibujar();
